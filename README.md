@@ -4,7 +4,8 @@ Octoprint plugin to make the navbar float on the page/stick to the top while scr
 
 ![screenshot](screenshot.png)
 
-###Setup
+
+### Setup
 
 Install via the bundled Plugin Manager or manually using this URL:
 
