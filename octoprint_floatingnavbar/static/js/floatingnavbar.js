@@ -4,10 +4,8 @@ $(function() {
 		
 		self.navigationViewModel = parameters[0];
 		
-		self.onStartUp = function() {
-			$("#navbar").toggleClass("navbar-fixed-top navbar-static-top");
-			$("div.container.octoprint-container").css("margin-top","60px");
-		}
+		$("#navbar").toggleClass("navbar-fixed-top navbar-static-top");
+		$("div.container.octoprint-container").css("margin-top","60px");
     }
 
     // This is how our plugin registers itself with the application, by adding some configuration
