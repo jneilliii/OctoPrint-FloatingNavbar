@@ -6,6 +6,7 @@ $(function() {
 
 		//Check for TouchUIPlugin, if not loaded apply special class.
 		var htmlId = $("html").attr("id");
+		console.log("id: "+htmlId);
 		if (htmlId && htmlId != "touch") {
 			$("#navbar").toggleClass("navbar-fixed-top navbar-static-top");
 			$("div.container.octoprint-container").css("margin-top","60px");
