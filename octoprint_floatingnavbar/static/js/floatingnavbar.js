@@ -8,7 +8,7 @@ $(function() {
 		var htmlId = $("html").attr("id");
 		if (htmlId != "touch") {
 			$("#navbar").toggleClass("navbar-fixed-top navbar-static-top");
-			$("div.container.octoprint-container").css("margin-top","60px");
+			$("div.container.octoprint-container").css("margin-top",$("#navbar").outerHeight(true)+20);
 		}
 	}
 
