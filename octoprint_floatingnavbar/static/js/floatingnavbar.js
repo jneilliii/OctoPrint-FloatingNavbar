@@ -3,28 +3,33 @@ $(function() {
 		var self = this;
 
 		self.navigationViewModel = parameters[0];
+		self.settingsViewModel = parameters[1];
+		self.isTouchEnabled = $("html").attr("id") == "touch" ? true : false;
 
-		//Check for TouchUIPlugin, if not loaded apply special class.
-		var htmlId = $("html").attr("id");
-		if (htmlId != "touch") {
-			$("#navbar").toggleClass("navbar-fixed-top navbar-static-top");
-			$("div.container.octoprint-container").css("margin-top",$("#navbar").outerHeight(true)+20);
-			$('#navbar').resize(function(){$("div.container.octoprint-container").css("margin-top",$("#navbar").outerHeight(true)+20);});
+		self.onAfterBinding = function() {
+			//Check for TouchUIPlugin, if not loaded apply special class.
+			if (!self.isTouchEnabled) {
+				$("#navbar").toggleClass("navbar-fixed-top navbar-static-top");
+				self.adjust_margin(self.settingsViewModel.settings.plugins.floatingnavbar.buffer_size());
+			}
+		}
+		
+		self.onEventSettingsUpdated = function(payload){
+			if (!self.isTouchEnabled) {
+				$('#navbar').off('resize');
+				self.adjust_margin(self.settingsViewModel.settings.plugins.floatingnavbar.buffer_size());
+			}
+		}
+		
+		self.adjust_margin = function(buffer_size){
+			$("div.container.octoprint-container").css("margin-top",$("#navbar").outerHeight(true)+parseInt(buffer_size));
+			$('#navbar').resize(function(){$("div.container.octoprint-container").css("margin-top",$("#navbar").outerHeight(true)+parseInt(buffer_size));});			
 		}
 	}
 
-	// This is how our plugin registers itself with the application, by adding some configuration
-	// information to the global variable OCTOPRINT_VIEWMODELS
-	OCTOPRINT_VIEWMODELS.push([
-		// This is the constructor to call for instantiating the plugin
-		floatingNavbarViewModel,
-
-		// This is a list of dependencies to inject into the plugin, the order which you request
-		// here is the order in which the dependencies will be injected into your view model upon
-		// instantiation via the parameters argument
-		["navigationViewModel"],
-
-		// Finally, this is the list of selectors for all elements we want this view model to be bound to.
-		[]
-	]);
+	OCTOPRINT_VIEWMODELS.push({
+		construct: floatingNavbarViewModel,
+		dependencies: ["navigationViewModel","settingsViewModel"],
+		elements: ["#settings_plugin_floatingnavbar"]
+	});
 });
