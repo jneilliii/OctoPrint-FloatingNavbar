@@ -2,9 +2,17 @@
 
 import octoprint.plugin
 
-class floatingnavbar(octoprint.plugin.AssetPlugin):
+class floatingnavbar(octoprint.plugin.AssetPlugin,octoprint.plugin.SettingsPlugin,octoprint.plugin.TemplatePlugin):
+
+	##~~ AssetPlugin mixin
+	
 	def get_assets(self):
 		return dict(js=["js/floatingnavbar.js"])
+		
+	##~~ SettingsPlugin mixin
+
+	def get_settings_defaults(self):
+		return dict(buffer_size=20)
 		
 	def get_version(self):
 		return self._plugin_version
@@ -27,7 +35,8 @@ class floatingnavbar(octoprint.plugin.AssetPlugin):
 			)
 		)
 
-__plugin_name__ = "FloatingNavbar"
+__plugin_name__ = "Floating Navbar"
+__plugin_pythoncompat__ = ">=2.7,<4"
 
 def __plugin_load__():
 	global __plugin_implementation__
