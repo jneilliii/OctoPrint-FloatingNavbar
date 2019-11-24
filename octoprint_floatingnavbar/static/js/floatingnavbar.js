@@ -25,6 +25,21 @@ $(function() {
 			$("div.container.octoprint-container").css("margin-top",$("#navbar").outerHeight(true)+parseInt(buffer_size));
 			$('#navbar').resize(function(){$("div.container.octoprint-container").css("margin-top",$("#navbar").outerHeight(true)+parseInt(buffer_size));});			
 		}
+		
+		self.evalScroll = function() {
+			var buttons = $(".to-top");
+			var offset = $(window).height() * 0.5;
+			var scrollTop = $(this).scrollTop();
+
+			if (scrollTop > offset) {
+				buttons.fadeIn(200);
+			} else {
+				buttons.fadeOut(200);
+			}
+		};
+		
+		$(window).scroll(self.evalScroll);
+		self.evalScroll();
 	}
 
 	OCTOPRINT_VIEWMODELS.push({
