@@ -1,0 +1,16 @@
+<a href="#top" class="to-top" title="Back to top" data-scroll="" style="display: none;"><i class="fa fa-arrow-up fa-2x"></i></a>
+<script type="JavaScript">
+	var evalScroll = function() {
+		var buttons = $(".to-top");
+		var offset = $(window).height() * 0.5;
+		var scrollTop = $(this).scrollTop();
+
+		if (scrollTop > offset) {
+			buttons.fadeIn(200);
+		} else {
+			buttons.fadeOut(200);
+		}
+	};
+	$(window).scroll(evalScroll);
+	evalScroll();
+</script>
