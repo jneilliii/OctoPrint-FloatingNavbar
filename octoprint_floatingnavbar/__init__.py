@@ -7,7 +7,7 @@ class floatingnavbar(octoprint.plugin.AssetPlugin,octoprint.plugin.SettingsPlugi
 	##~~ AssetPlugin mixin
 	
 	def get_assets(self):
-		return dict(js=["js/floatingnavbar.js"])
+		return dict(js=["js/floatingnavbar.js"],css=["css/floatingnavbar.css"])
 		
 	##~~ SettingsPlugin mixin
 

@@ -1,0 +1,11 @@
+.to-top {
+	position: fixed;
+	right: 10px;
+	bottom: 10px;
+	cursor: pointer;
+	padding: 10px;
+	display: none;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
