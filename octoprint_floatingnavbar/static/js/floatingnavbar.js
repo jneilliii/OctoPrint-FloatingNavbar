@@ -18,7 +18,7 @@ $(function() {
 			}
 		}
 		self.adjust_margin = function(buffer_size){
-			$("div.container.octoprint-container, div#dasboardContainer.dashboard-full").css("margin-top",$("#navbar").outerHeight(true)+parseInt(buffer_size));
+			$("div.container.octoprint-container, div#dasboardContainer.dashboard-full, div#dashboardContainer.dashboard-full").css("margin-top",$("#navbar").outerHeight(true)+parseInt(buffer_size));
 			$('#navbar').resize(function(){$("div.container.octoprint-container, div#dasboardContainer.dashboard-full > div.dasboardFsContainer").css("margin-top",$("#navbar").outerHeight(true)+parseInt(buffer_size));});
 		}
 		// dashboard plugin patch
