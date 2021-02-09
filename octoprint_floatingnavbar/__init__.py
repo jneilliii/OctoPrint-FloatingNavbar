@@ -12,8 +12,8 @@ class floatingnavbar(octoprint.plugin.AssetPlugin,octoprint.plugin.SettingsPlugi
 	##~~ SettingsPlugin mixin
 
 	def get_settings_defaults(self):
-		return dict(buffer_size=20)
-		
+		return dict(buffer_size=20,scroll_distance=100)
+
 	def get_version(self):
 		return self._plugin_version
 		
@@ -29,6 +29,16 @@ class floatingnavbar(octoprint.plugin.AssetPlugin,octoprint.plugin.SettingsPlugi
 				user="jneilliii",
 				repo="OctoPrint-FloatingNavbar",
 				current=self._plugin_version,
+				stable_branch=dict(
+					name="Stable", branch="master", comittish=["master"]
+				),
+				prerelease_branches=[
+					dict(
+						name="Release Candidate",
+						branch="rc",
+						comittish=["rc", "master"],
+					)
+				],
 
 				# update method: pip
 				pip="https://github.com/jneilliii/OctoPrint-FloatingNavbar/archive/{target_version}.zip"

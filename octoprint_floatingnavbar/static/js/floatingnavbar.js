@@ -3,6 +3,7 @@ $(function() {
 		var self = this;
 		self.navigationViewModel = parameters[0];
 		self.settingsViewModel = parameters[1];
+		self.scroll_distance = ko.observable(100);
 		self.isTouchEnabled = $("html").attr("id") == "touch" ? true : false;
 		self.onAfterBinding = function() {
 			//Check for TouchUIPlugin, if not loaded apply special class.
@@ -10,12 +11,14 @@ $(function() {
 				$("#navbar").toggleClass("navbar-fixed-top navbar-static-top");
 				self.adjust_margin(self.settingsViewModel.settings.plugins.floatingnavbar.buffer_size());
 			}
+			self.scroll_distance(self.settingsViewModel.settings.plugins.floatingnavbar.scroll_distance());
 		}
 		self.onEventSettingsUpdated = function(payload){
 			if (!self.isTouchEnabled) {
 				$('#navbar').off('resize');
 				self.adjust_margin(self.settingsViewModel.settings.plugins.floatingnavbar.buffer_size());
 			}
+			self.scroll_distance(self.settingsViewModel.settings.plugins.floatingnavbar.scroll_distance());
 		}
 		self.adjust_margin = function(buffer_size){
 			$("div.container.octoprint-container, div#dasboardContainer.dashboard-full, div#dashboardContainer.dashboard-full").css("margin-top",$("#navbar").outerHeight(true)+parseInt(buffer_size));
@@ -29,9 +32,9 @@ $(function() {
 		}
 		self.evalScroll = function() {
 			var buttons = $(".to-top");
-			var offset = $(window).height() * 0.10;
+			var offset = self.scroll_distance();
 			var scrollTop = $(this).scrollTop();
-			if (scrollTop > offset) {
+			if (scrollTop > offset && offset > 0) {
 				buttons.fadeIn(200);
 			} else {
 				buttons.fadeOut(200);
