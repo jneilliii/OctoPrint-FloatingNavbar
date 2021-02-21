@@ -9,3 +9,8 @@
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 }
+
+/* hack for fullscreen plugin*/
+.inlineFullscreen #navbar.navbar-fixed-top {
+	z-index: -1;
+}
